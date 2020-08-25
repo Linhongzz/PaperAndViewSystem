@@ -118,6 +118,7 @@
 <body>
 <div class="contain">
     <%@ include file="tree-well.jsp" %>
+    <%--设备说明书类别图片展示--%>
     <div class="main">
         <div class="row">
             <div class="col-sm-6 col-md-4">

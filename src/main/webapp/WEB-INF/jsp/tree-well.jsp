@@ -8,6 +8,7 @@
         <%--如果不是root或管理员就不显示该层目录--%>
         <c:if test="${sessionScope.user.role.roleId!=3}">
             <li>
+                <%--有ref可以直接跳转--%>
                 <span class="glyphicon-user" aria-hidden="true"> 用户管理</span>
                 <ul>
                     <li>
@@ -20,6 +21,7 @@
             </li>
         </c:if>
         <li>
+            <%--有ref可以直接跳转--%>
             <span class="glyphicon-folder-open">图纸部分</span>
             <ul>
                 <li>
@@ -37,6 +39,7 @@
                     </ul>
                 </li>
                 <c:if test="${sessionScope.user.role.roleId!=3}">
+                    <%--有ref可以直接跳转--%>
                     <li>
                         <span><i class="icon-leaf"></i><a href="${pageContext.request.contextPath}/tuzhi/toManageTuzhi.do">管理图纸</a></span>
                         <ul>
@@ -62,7 +65,7 @@
 
 
 
-
+                        <%--有ref可以直接跳转--%>
                         <c:forEach items="${sessionScope.wendangleibieList}" var="leibie" varStatus="s">
                                 <c:if test="${leibie.depth==0}">
                                     <li>
@@ -107,10 +110,6 @@
                         </li>
                     </c:if>
                 </ul>
-            </li>
-            <li>
-                <span class="glyphicon-folder-open">添加目录</span>
-
             </li>
     </ul>
 </div>

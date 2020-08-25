@@ -56,6 +56,42 @@ public class TuzhiController {
         return "tuzhiList";
     }
 
+
+    @RequestMapping("/toManageTuzhi")
+    public String toManageTuzhi(HttpServletRequest request) {
+        //调用service查询所有的图纸
+        List<Tuzhi> tuzhiList = tuzhiService.findTuzhiByPages(request);
+        //查询到所有图纸的类别并存入session，便于渲染树状结构，选择图纸类别进行查询
+        List<Tuzhileibie> tuzhileibieList = tuzhiService.findAllTuzhiLeibies();
+        //查询所有图纸的数量，用于 分页条
+        int totalPage = tuzhiService.getTotalPage();
+
+        //存入session
+        request.getSession().setAttribute("tuzhiList", tuzhiList);
+        request.getSession().setAttribute("tuzhileibieList", tuzhileibieList);
+        request.getSession().setAttribute("totalPage", totalPage);
+        //交给jsp渲染视图
+        return "manageTuzhi";
+    }
+
+    @RequestMapping("/toAddTuzhi")
+    public String toAddTuzhi(HttpServletRequest request) {
+        //查询到所有图纸的类别并存入session，便于渲染树状结构，选择图纸类别进行查询
+        List<Tuzhileibie> tuzhileibieList = tuzhiService.findAllTuzhiLeibies();
+        request.getSession().setAttribute("tuzhileibieList", tuzhileibieList);
+        return "addTuzhi";
+    }
+
+    @RequestMapping("/toUpdateTuzhi")
+    public String toUpdateTuzhi(HttpServletRequest request) {
+        //获取到需要修改的图纸的id，在数据库中查找到这个数据，并在修改页面进行回显
+        Long tuzhiId = Long.parseLong(request.getParameter("tuzhiId"));
+        Tuzhi changeTuzhi = tuzhiService.getTuzhiById(tuzhiId);
+        request.getSession().setAttribute("changeTuzhi", changeTuzhi);
+
+        return "updateTuzhi";
+    }
+
     /**
      * 通过参数 来获得不同页的图纸
      */
@@ -100,31 +136,6 @@ public class TuzhiController {
         mv.addObject("currentPage", currentPage);
         mv.setView(new MappingJackson2JsonView());//设置视图为json
         return mv;
-    }
-
-    @RequestMapping("/toManageTuzhi")
-    public String toManageTuzhi(HttpServletRequest request) {
-        //调用service查询所有的图纸
-        List<Tuzhi> tuzhiList = tuzhiService.findTuzhiByPages(request);
-        //查询到所有图纸的类别并存入session，便于渲染树状结构，选择图纸类别进行查询
-        List<Tuzhileibie> tuzhileibieList = tuzhiService.findAllTuzhiLeibies();
-        //查询所有图纸的数量，用于 分页条
-        int totalPage = tuzhiService.getTotalPage();
-
-        //存入session
-        request.getSession().setAttribute("tuzhiList", tuzhiList);
-        request.getSession().setAttribute("tuzhileibieList", tuzhileibieList);
-        request.getSession().setAttribute("totalPage", totalPage);
-        //交给jsp渲染视图
-        return "manageTuzhi";
-    }
-
-    @RequestMapping("/toAddTuzhi")
-    public String toAddTuzhi(HttpServletRequest request) {
-        //查询到所有图纸的类别并存入session，便于渲染树状结构，选择图纸类别进行查询
-        List<Tuzhileibie> tuzhileibieList = tuzhiService.findAllTuzhiLeibies();
-        request.getSession().setAttribute("tuzhileibieList", tuzhileibieList);
-        return "addTuzhi";
     }
 
     @RequestMapping("/addTuzhi")
@@ -182,16 +193,6 @@ public class TuzhiController {
 
 
         return "redirect:/tuzhi/toAddTuzhi.do";
-    }
-
-    @RequestMapping("/toUpdateTuzhi")
-    public String toUpdateTuzhi(HttpServletRequest request) {
-        //获取到需要修改的图纸的id，在数据库中查找到这个数据，并在修改页面进行回显
-        Long tuzhiId = Long.parseLong(request.getParameter("tuzhiId"));
-        Tuzhi changeTuzhi = tuzhiService.getTuzhiById(tuzhiId);
-        request.getSession().setAttribute("changeTuzhi", changeTuzhi);
-
-        return "updateTuzhi";
     }
 
     @RequestMapping("/updateTuzhi")
