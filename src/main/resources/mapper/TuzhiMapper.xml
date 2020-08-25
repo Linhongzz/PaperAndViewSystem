@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hebeu.mapper.TuzhiMapper">
+    <resultMap id="tuzhiResultMap" type="Tuzhi">
+        <id column="id" property="id"/>
+        <result column="tuming" property="tuming"/>
+        <result column="tuhao" property="tuhao"/>
+        <result column="path" property="path"/>
+        <association property="leibie" column="leibie_id"
+                     select="cn.edu.hebeu.mapper.TuzhileibieMapper.getLeibie"/>
+    </resultMap>
+    <select id="findTuzhiByPages" resultMap="tuzhiResultMap">
+        select * from tuzhi
+    </select>
+    <select id="listTuzhiByParams" resultMap="tuzhiResultMap" parameterType="long">
+        select * from tuzhi where leibie_id=#{leibieId}
+    </select>
+    <select id="listTuzhiByParamsWithoutLeibieId" resultMap="tuzhiResultMap" parameterType="long">
+        select * from tuzhi
+    </select>
+    <select id="getTotalByLeibieId" resultType="int" parameterType="long">
+        select count(*) from tuzhi where leibie_id=#{leibieId}
+    </select>
+    <select id="getTotal" resultType="int">
+        select count(*) from tuzhi
+    </select>
+    <select id="listTuzhiByTuming" resultMap="tuzhiResultMap">
+        select * from tuzhi where tuming like concat('%',#{text},'%')
+    </select>
+    <select id="listTuzhiByTuhao" resultMap="tuzhiResultMap">
+        select * from tuzhi where tuhao like concat('%',#{text},'%')
+    </select>
+    <select id="getTotalByTuming" resultType="int">
+        select count(*) from tuzhi where tuming like concat('%',#{text},'%')
+    </select>
+    <select id="getTotalByTuhao" resultType="int">
+        select count(*) from tuzhi where tuhao like concat('%',#{text},'%')
+    </select>
+    <insert id="addTuzhi" parameterType="Tuzhi">
+      insert into tuzhi values (null,#{leibie.leibieId},#{tuming},#{tuhao},#{path})
+    </insert>
+    <select id="getTuzhiById" parameterType="long" resultMap="tuzhiResultMap">
+        select * from tuzhi where id=#{id}
+    </select>
+    <update id="updateTuzhi" parameterType="Tuzhi">
+        update tuzhi set leibie_id=#{leibie.leibieId},tuming=#{tuming},tuhao=#{tuhao},path=#{path}
+        where id=#{id}
+    </update>
+    <delete id="deleteTuzhiById" parameterType="long">
+         delete from tuzhi where id=#{id}
+    </delete>
+</mapper>

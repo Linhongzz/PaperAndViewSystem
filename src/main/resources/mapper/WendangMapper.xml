@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hebeu.mapper.WendangMapper">
+    <resultMap id="wendangResultMap" type="Wendang">
+        <id column="id" property="id"/>
+        <result column="wendangming" property="wendangming"/>
+        <result column="yuanshihouzhui" property="yuanshihouzhui"/>
+        <result column="path" property="path"/>
+        <association property="leibie" column="leibie_id"
+                     select="cn.edu.hebeu.mapper.WendangleibieMapper.getLeibie"/>
+    </resultMap>
+    <select id="findWendangByPages" resultMap="wendangResultMap">
+        select * from wendang
+    </select>
+    <select id="getTotal" resultType="int">
+        select count(*) from wendang
+    </select>
+    <select id="getTotalByLeibieId" resultType="int" parameterType="long">
+        select count(*) from wendang where leibie_id=#{leibieId}
+    </select>
+    <select id="listWendangByParamsWithoutLeibieId" resultMap="wendangResultMap">
+        select * from wendang
+    </select>
+    <select id="listWendangByParams" resultMap="wendangResultMap" parameterType="long">
+        select * from wendang where leibie_id=#{leibieId}
+    </select>
+    <select id="listWendangByFuzzyQuery" resultMap="wendangResultMap" parameterType="String">
+        select * from wendang where wendangming like concat('%',#{text},'%')
+    </select>
+    <select id="getTotalPageForFuzzyQuery" resultType="int" parameterType="String">
+        select count(*) from wendang where wendangming like concat('%',#{text},'%')
+    </select>
+    <insert id="saveWendang" parameterType="Wendang">
+        insert into wendang values (null,#{leibie.leibieId},#{wendangming},#{yuanshihouzhui},#{path})
+    </insert>
+    <select id="getWendangById" resultMap="wendangResultMap" parameterType="long">
+        select * from wendang where id=#{wendangId}
+    </select>
+    <update id="updateWendang" parameterType="Wendang">
+        update wendang set leibie_id=#{leibie.leibieId},wendangming=#{wendangming},path=#{path}
+        where id=#{id}
+    </update>
+    <delete id="deleteWendangById" parameterType="long">
+        delete from wendang where id=#{wendangId}
+    </delete>
+</mapper>
