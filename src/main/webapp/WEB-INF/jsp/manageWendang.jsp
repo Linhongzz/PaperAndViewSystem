@@ -159,19 +159,6 @@
 
 <script type="text/javascript">
     $(function () {
-        $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
-        $('.tree li.parent_li > span').on('click', function (e) {
-            var children = $(this).parent('li.parent_li').find(' > ul > li');
-            if (children.is(":visible")) {
-                children.hide('fast');
-                $(this).attr('title', 'Expand this branch').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
-            } else {
-                children.show('fast');
-                $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
-            }
-            e.stopPropagation();
-        });
-
         /*给查询按钮添加单击事件 异步查询数据*/
         $("#search_button").click(function () {
             var text=$("#search_text").val();
@@ -278,7 +265,7 @@
                 }
             });
     }
-    
+
     //删除记录
     function deleteWendang(wendangId) {
         if (confirm("确认删除这条记录吗？")){//弹出确认框

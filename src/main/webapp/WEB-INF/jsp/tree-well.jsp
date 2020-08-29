@@ -1,7 +1,9 @@
 <%@page pageEncoding="UTF-8"%>
 <div class="top" style="z-index:999;position:absolute;background: #438eb9;height: 40px;width: 100%;font-size: 22px;line-height: 40px;color: white;font-weight: bolder;padding-left: 20px;position:fixed; top:0; ">
 水利支持系统
-<span style="float:right;padding-right:15px;font-size:14px!important;font-weight:normal"><a class="btn-danger" href="${pageContext.request.contextPath}/user/logout.do">退出登录</a></span>
+<span style="float:right;padding-right:15px;font-size:14px!important;font-weight:normal">
+    <a class="btn-danger" href="${pageContext.request.contextPath}/user/logout.do">退出登录</a>
+</span>
 </div>
 <div class="tree well" style="margin-top:40px;">
     <ul  style="margin-left: -50px;font-size: 18px;">
@@ -113,3 +115,20 @@
             </li>
     </ul>
 </div>
+<!--树状结构动态展示-->
+<script type="text/javascript">
+    $(function () {
+        $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+        $('.tree li.parent_li > span').on('click', function (e) {
+            var children = $(this).parent('li.parent_li').find(' > ul > li');
+            if (children.is(":visible")) {
+                children.hide('fast');
+                $(this).attr('title', 'Expand this branch').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+            } else {
+                children.show('fast');
+                $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+            }
+            e.stopPropagation();
+        });
+    });
+</script>
