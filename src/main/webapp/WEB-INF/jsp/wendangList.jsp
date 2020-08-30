@@ -158,8 +158,8 @@
 
         </div>
     </div>
-    <%@ include file="../js/wendang/wendangComm.jsp" %>
 </body>
+<%@ include file="../js/wendang/wendangComm.jsp" %>
 <script type="text/javascript">
     $(function () {
         <%-- 展开文档管理标签--%>
