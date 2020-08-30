@@ -384,4 +384,5 @@
         $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
     });
 </script>
+<%@ include file="../js/wendang/wendangComm.jsp" %>
 </html>
