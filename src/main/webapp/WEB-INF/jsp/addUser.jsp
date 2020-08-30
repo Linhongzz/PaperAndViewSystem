@@ -20,7 +20,6 @@
         padding-left: 25%;
         padding-right: 55%;
     }
-
     .tree {
         height: 100%;
         padding: 19px;
@@ -149,5 +148,12 @@
         </div>
     </div>
 </body>
-
+<script type="text/javascript">
+    $(function () {
+        <%-- 展开用户管理标签--%>
+        let children =  $('#user-manage').parent('li.parent_li').find(' > ul > li');
+        children.show('fast');
+        $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+    });
+</script>
 </html>

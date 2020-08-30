@@ -11,7 +11,7 @@
         <c:if test="${sessionScope.user.role.roleId!=3}">
             <li>
                 <%--有ref可以直接跳转--%>
-                <span class="glyphicon-user" aria-hidden="true"> 用户管理</span>
+                <span class="glyphicon-user" aria-hidden="true" id="user-manage">用户管理</span>
                 <ul>
                     <li>
                         <span><i class="icon-minus-sign"></i> <a href="${pageContext.request.contextPath}/user/userList.do">显示用户</a></span>
@@ -64,9 +64,6 @@
                     <%--<li>
                         <span><i class="icon-leaf"></i><a href="${pageContext.request.contextPath}/wendang/listWendang.do">查询文档</a></span>
                         <ul>--%>
-
-
-
                         <%--有ref可以直接跳转--%>
                         <c:forEach items="${sessionScope.wendangleibieList}" var="leibie" varStatus="s">
                                 <c:if test="${leibie.depth==0}">
@@ -120,7 +117,7 @@
     $(function () {
         $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
         $('.tree li.parent_li > span').on('click', function (e) {
-            var children = $(this).parent('li.parent_li').find(' > ul > li');
+            let children = $(this).parent('li.parent_li').find(' > ul > li');
             if (children.is(":visible")) {
                 children.hide('fast');
                 $(this).attr('title', 'Expand this branch').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
@@ -130,5 +127,9 @@
             }
             e.stopPropagation();
         });
+        /*初始化关闭所有的标签*/
+        let children =  $('.tree li.parent_li > span').parent('li.parent_li').find(' > ul > li');
+        children.hide('fast');
+        $(this).attr('title', 'Expand this branch').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
     });
 </script>
