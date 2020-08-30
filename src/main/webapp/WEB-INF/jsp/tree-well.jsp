@@ -61,7 +61,7 @@
             </ul>
         </li>
             <li>
-                <span class="glyphicon-folder-open">文档部分</span>
+                <span class="glyphicon-folder-open wendang-manage">文档部分</span>
                 <ul>
                     <%--<li>
                         <span><i class="icon-leaf"></i><a href="${pageContext.request.contextPath}/wendang/listWendang.do">查询文档</a></span>
@@ -70,7 +70,7 @@
                         <c:forEach items="${sessionScope.wendangleibieList}" var="leibie" varStatus="s">
                                 <c:if test="${leibie.depth==0}">
                                     <li>
-                                        <span>
+                                        <span class="wendang-manage">
                                             <c:if test="${leibie.leibieId==1}">
                                                 <i class="icon-leaf"></i>
                                                 <a href="${pageContext.request.contextPath}/wendang/toShebeishuomingshu.do" id="wendang${leibie.leibieId}">${leibie.leibieName}</a>
@@ -84,7 +84,7 @@
                                             <c:forEach items="${sessionScope.wendangleibieList}" var="leafleibie" varStatus="leafs">
                                                 <c:if test="${leafleibie.depth==1&&leafleibie.parentId==leibie.leibieId}">
                                                     <li>
-                                                        <span>
+                                                        <span class="wendang-manage">
                                                             <i class="icon-leaf"></i>
                                                             <a id="wendang${leafleibie.leibieId}">${leafleibie.leibieName}</a>
                                                         </span>
@@ -99,7 +99,7 @@
                     </li>--%>
                     <c:if test="${sessionScope.user.role.roleId!=3}">
                         <li>
-                            <span><i class="icon-leaf"></i><a href="${pageContext.request.contextPath}/wendang/toManageWendang.do">管理文档</a></span>
+                            <span class="wendang-manage"><i class="icon-leaf"></i><a href="${pageContext.request.contextPath}/wendang/toManageWendang.do">管理文档</a></span>
                             <ul>
                                 <li>
                                 <span>

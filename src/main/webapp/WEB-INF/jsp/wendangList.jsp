@@ -282,5 +282,13 @@
         }
     </script>
 </body>
+<script type="text/javascript">
+    $(function () {
+        <%-- 展开文档管理标签--%>
+        let children =  $('.wendang-manage').parent('li.parent_li').find(' > ul > li');
+        children.show('fast');
+        $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+    });
+</script>
 
 </html>
