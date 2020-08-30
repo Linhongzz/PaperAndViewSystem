@@ -153,4 +153,12 @@
     </c:if>
     <% request.getSession().removeAttribute("updateTuzhi_msg");%>
 </script>
+<script type="text/javascript">
+    $(function () {
+        <%-- 展开图纸管理标签--%>
+        let children =  $('.tuzhi-manage').parent('li.parent_li').find(' > ul > li');
+        children.show('fast');
+        $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+    });
+</script>
 </html>

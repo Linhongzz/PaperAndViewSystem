@@ -24,10 +24,10 @@
         </c:if>
         <li>
             <%--有ref可以直接跳转--%>
-            <span class="glyphicon-folder-open">图纸部分</span>
+            <span class="glyphicon-folder-open tuzhi-manage">图纸部分</span>
             <ul>
                 <li>
-                    <span><i class="icon-leaf"></i><a href="${pageContext.request.contextPath}/tuzhi/listTuzhi.do">查询图纸</a></span>
+                    <span class="tuzhi-manage"><i class="icon-leaf"></i><a href="${pageContext.request.contextPath}/tuzhi/listTuzhi.do">查询图纸</a></span>
                     <ul>
 
                         <c:forEach items="${sessionScope.tuzhileibieList}" var="leibie" varStatus="s">
@@ -43,7 +43,9 @@
                 <c:if test="${sessionScope.user.role.roleId!=3}">
                     <%--有ref可以直接跳转--%>
                     <li>
-                        <span><i class="icon-leaf"></i><a href="${pageContext.request.contextPath}/tuzhi/toManageTuzhi.do">管理图纸</a></span>
+                        <span class="tuzhi-manage">
+                            <i class="icon-leaf"></i><a href="${pageContext.request.contextPath}/tuzhi/toManageTuzhi.do">管理图纸</a>
+                        </span>
                         <ul>
                             <li>
 
