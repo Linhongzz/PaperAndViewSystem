@@ -108,6 +108,11 @@ public class TuzhiServiceImpl implements TuzhiService {
     }
 
     @Override
+    public int saveTuzhiLeibie(String leibieName) {
+        return tuzhileibieMapper.addTuzhiLeibie(leibieName);
+    }
+
+    @Override
     public Tuzhi getTuzhiById(Long tuzhiId) {
         return tuzhiMapper.getTuzhiById(tuzhiId);
     }

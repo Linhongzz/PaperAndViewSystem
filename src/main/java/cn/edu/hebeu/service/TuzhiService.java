@@ -28,4 +28,7 @@ public interface TuzhiService {
     int updateTuzhi(Tuzhi changeTuzhi);
 
     int deleteTuzhiById(Long tuzhiId);
+
+    // 保存图纸类别
+    int saveTuzhiLeibie(String tuzhileibie);
 }

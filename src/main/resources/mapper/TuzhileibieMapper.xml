@@ -11,4 +11,8 @@
     <select id="findAllTuzhiLeibies" resultType="Tuzhileibie">
         select * from tuzhileibie
     </select>
+
+    <insert id="addTuzhiLeibie" parameterType="string">
+        insert into tuzhileibie values (null, #{leibieName})
+    </insert>
 </mapper>

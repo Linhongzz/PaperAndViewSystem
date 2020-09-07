@@ -7,6 +7,7 @@ import cn.edu.hebeu.service.impl.TuzhiServiceImpl;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -279,5 +280,31 @@ public class TuzhiController {
             out.flush();
         }
         out.close();
+    }
+    // 跳转到添加类别页面
+    @RequestMapping("/toAddTuzhiLeibie")
+    public String toAddTuzhiLeibie(HttpServletRequest request) {
+        //查询到所有图纸的类别并存入session，便于渲染树状结构，选择图纸类别进行查询
+        List<Tuzhileibie> tuzhileibieList = tuzhiService.findAllTuzhiLeibies();
+        request.getSession().setAttribute("tuzhileibieList", tuzhileibieList);
+        return "addTuzhiLeibie";
+    }
+    @RequestMapping("/addTuzhiLeibie")
+    public String addTuzhiLeibie(HttpServletRequest request) {
+        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+        //获取参数
+        String leibieName = request.getParameter("leibieName");
+        if (StringUtils.isEmpty(leibieName)) {
+            request.getSession().setAttribute("addTuzhiLeibie_msg", "请输入图纸类别名称");
+            return "redirect:/tuzhi/toAddTuzhiLeibie.do";
+        }
+        int i = tuzhiService.saveTuzhiLeibie(leibieName);
+        if (i == 1) {
+            request.getSession().setAttribute("addTuzhiLeibie_msg", "保存成功");
+
+        }
+
+
+        return "redirect:/tuzhi/toAddTuzhiLeibie.do";
     }
 }
