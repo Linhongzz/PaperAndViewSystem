@@ -48,12 +48,16 @@
                         </span>
                         <ul>
                             <li>
-
                                 <span>
                                     <i class="icon-leaf"></i>
                                     <a id="toAddTuZhi" href="${pageContext.request.contextPath}/tuzhi/toAddTuzhi.do">上传图纸</a>
                                 </span>
-
+                            </li>
+                            <li>
+                                <span>
+                                    <i class="icon-leaf"></i>
+                                    <a id="toAddWendangLeibie" href="${pageContext.request.contextPath}/tuzhi/toAddTuzhiLeibie.do">添加类别</a>
+                                </span>
                             </li>
                         </ul>
                     </li>
