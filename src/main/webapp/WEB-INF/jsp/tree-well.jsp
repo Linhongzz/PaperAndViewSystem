@@ -56,7 +56,7 @@
                             <li>
                                 <span>
                                     <i class="icon-leaf"></i>
-                                    <a id="toAddWendangLeibie" href="${pageContext.request.contextPath}/tuzhi/toAddTuzhiLeibie.do">添加类别</a>
+                                    <a id="toAddTuzhiLeibie" href="${pageContext.request.contextPath}/tuzhi/toAddTuzhiLeibie.do">添加类别</a>
                                 </span>
                             </li>
                         </ul>
@@ -109,6 +109,12 @@
                                 <span>
                                     <i class="icon-leaf"></i>
                                     <a id="toAddWendang" href="${pageContext.request.contextPath}/wendang/toAddWendang.do">上传文档</a>
+                                </span>
+                                </li>
+                                <li>
+                                <span>
+                                    <i class="icon-leaf"></i>
+                                    <a id="toAddWendangLeibie" href="${pageContext.request.contextPath}/wendang/toAddWendangLeibie.do">添加类别</a>
                                 </span>
                                 </li>
                             </ul>

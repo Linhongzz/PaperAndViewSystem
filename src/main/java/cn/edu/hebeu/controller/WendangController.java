@@ -9,6 +9,7 @@ import com.aspose.words.Document;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.ContextLoader;
@@ -334,5 +335,31 @@ public class WendangController {
     @RequestMapping("toShebeishuomingshu")
     public String toShebeishuomingshu() {
         return "shebeishuomingshu";
+    }
+
+    // 跳转到添加类别页面
+    @RequestMapping("/toAddWendangLeibie")
+    public String toAddTuzhiLeibie(HttpServletRequest request) {
+        //查询到所有图纸的类别并存入session，便于渲染树状结构，选择图纸类别进行查询
+        List<Wendangleibie> WendangleibieList = wendangService.findAllWendangLeibies();
+        request.getSession().setAttribute("WendangleibieList", WendangleibieList);
+        return "addWendangLeibie";
+    }
+    @RequestMapping("/addWendangLeibie")
+    public String addTuzhiLeibie(Wendangleibie wendangleibie) {
+        System.out.println(wendangleibie);
+        /*MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+        //获取参数
+        String leibieName = request.getParameter("leibieName");
+        if (StringUtils.isEmpty(leibieName)) {
+            request.getSession().setAttribute("addTuzhiLeibie_msg", "请输入图纸类别名称");
+            return "redirect:/tuzhi/toAddTuzhiLeibie.do";
+        }
+        int i = wendangService.saveTuzhiLeibie(leibieName);
+        if (i == 1) {
+            request.getSession().setAttribute("addTuzhiLeibie_msg", "保存成功");
+
+        }*/
+        return "redirect:/wendang/toAddWendangLeibie.do";
     }
 }

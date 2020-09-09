@@ -303,8 +303,6 @@ public class TuzhiController {
             request.getSession().setAttribute("addTuzhiLeibie_msg", "保存成功");
 
         }
-
-
         return "redirect:/tuzhi/toAddTuzhiLeibie.do";
     }
 }
