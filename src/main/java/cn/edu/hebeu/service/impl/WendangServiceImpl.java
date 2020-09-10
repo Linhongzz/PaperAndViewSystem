@@ -93,6 +93,14 @@ public class WendangServiceImpl implements WendangService {
     }
 
     @Override
+    public int saveWendangLeibie(Wendangleibie wendangleibie) {
+        // 获取到夫类别文档类别的depth
+        Wendangleibie parentLeibie = wendangleibieMapper.getLeibie(wendangleibie.getParentId());
+        wendangleibie.setDepth(parentLeibie.getDepth()+1);
+        return wendangleibieMapper.addWendangLeibie(wendangleibie);
+    }
+
+    @Override
     public Wendang getWendangById(Long wendangId) {
         return wendangMapper.getWendangById(wendangId);
     }

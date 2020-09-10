@@ -145,7 +145,7 @@
         alert("${sessionScope.addWendang_msg}")
     });
     </c:if>
-    <% request.getSession().removeAttribute("addWendang_msg");%>
+    <% request.getSession().removeAttribute("addWendangLeibie_msg");%>
 </script>
 <script type="text/javascript">
     $(function () {

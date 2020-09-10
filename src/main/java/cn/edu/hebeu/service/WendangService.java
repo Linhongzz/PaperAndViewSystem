@@ -20,7 +20,7 @@ public interface WendangService {
     int getTotalPageForFuzzyQuery(String text);
 
     int saveWendang(Wendang wendang);
-
+    int saveWendangLeibie(Wendangleibie wendangleibie);
     Wendang getWendangById(Long wendangId);
 
     int updateWendang(Wendang changeWendang);

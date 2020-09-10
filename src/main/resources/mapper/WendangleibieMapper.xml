@@ -11,4 +11,7 @@
     <select id="findAllWendangLeibies" resultType="Wendangleibie">
         select * from wendangleibie
     </select>
+    <insert id="addWendangLeibie" parameterType="Wendangleibie">
+        insert into wendangleibie values (null,#{parentId},#{depth},#{leibieName})
+    </insert>
 </mapper>

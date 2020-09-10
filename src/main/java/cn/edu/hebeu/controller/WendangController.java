@@ -12,8 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -347,19 +351,20 @@ public class WendangController {
     }
     @RequestMapping("/addWendangLeibie")
     public String addTuzhiLeibie(Wendangleibie wendangleibie) {
-        System.out.println(wendangleibie);
-        /*MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
-        //获取参数
-        String leibieName = request.getParameter("leibieName");
-        if (StringUtils.isEmpty(leibieName)) {
-            request.getSession().setAttribute("addTuzhiLeibie_msg", "请输入图纸类别名称");
-            return "redirect:/tuzhi/toAddTuzhiLeibie.do";
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        // 获取到父类别的id和新增的类别的名称
+        if (null == wendangleibie.getParentId()) {
+            request.getSession().setAttribute("addWendangLeibie_msg", "请选择父类别");
         }
-        int i = wendangService.saveTuzhiLeibie(leibieName);
+        if (StringUtils.isEmpty(wendangleibie.getLeibieName())) {
+            if (null == wendangleibie.getParentId()) {
+                request.getSession().setAttribute("addWendangLeibie_msg", "请输入新增类名");
+            }
+        }
+        int i = wendangService.saveWendangLeibie(wendangleibie);
         if (i == 1) {
             request.getSession().setAttribute("addTuzhiLeibie_msg", "保存成功");
-
-        }*/
+        }
         return "redirect:/wendang/toAddWendangLeibie.do";
     }
 }

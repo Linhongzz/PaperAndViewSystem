@@ -13,4 +13,5 @@ public interface WendangleibieMapper {
 
     List<Wendangleibie> findAllWendangLeibies();
 
+    int addWendangLeibie(Wendangleibie wendangleibie);
 }
