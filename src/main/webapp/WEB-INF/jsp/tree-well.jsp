@@ -122,6 +122,12 @@
                     </c:if>
                 </ul>
             </li>
+            <li>
+                <span class="glyphicon-folder-open wendang-manage">
+                    <i class="icon-leaf"></i>
+                    <a id="usingGuide" href="/documents/UsingGuide.pdf">使用说明</a>
+                </span>
+            </li>
     </ul>
 </div>
 <!--树状结构动态展示-->
